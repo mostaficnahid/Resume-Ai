@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const About = () => {
   return (
-    <div className="min-h-screen pt-48 pb-32">
+    <div className="min-h-screen pt-48 pb-32 bg-surface">
       <div className="max-w-7xl mx-auto px-6">
         <div className="lg:grid lg:grid-cols-12 lg:gap-24 items-center mb-40">
           <motion.div 
@@ -16,7 +16,7 @@ const About = () => {
               <Heart className="w-3.5 h-3.5" />
               <span>Our Mission</span>
             </div>
-            <h1 className="text-6xl lg:text-8xl font-display font-extrabold text-brand-900 tracking-tight leading-tight mb-10">
+            <h1 className="text-5xl lg:text-8xl font-display font-extrabold text-brand-900 tracking-tight leading-tight mb-10">
               Empowering <br />
               <span className="text-accent italic font-light">Ambition.</span>
             </h1>
@@ -78,16 +78,16 @@ const About = () => {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-brand-900 rounded-[5rem] p-20 lg:p-40 text-center relative overflow-hidden shadow-premium-hover"
+          className="bg-brand-900 rounded-[3rem] lg:rounded-[5rem] p-12 lg:p-32 text-center relative overflow-hidden shadow-premium-hover"
         >
           <div className="absolute top-0 left-0 w-full h-full opacity-15 pointer-events-none">
             <div className="absolute top-[-30%] left-[-20%] w-[80%] h-[80%] bg-accent rounded-full blur-[200px]"></div>
           </div>
           <div className="relative z-10">
-            <h2 className="text-6xl lg:text-8xl font-display font-extrabold text-white mb-12 leading-[0.9] tracking-tight text-balance">
+            <h2 className="text-4xl lg:text-8xl font-display font-extrabold text-white mb-10 leading-[1.1] tracking-tight text-balance">
               Join the career <br /> revolution.
             </h2>
-            <Link to="/register" className="inline-flex bg-white text-brand-900 px-16 py-8 rounded-[2.5rem] text-2xl font-bold hover:bg-brand-50 transition-all active:scale-95 shadow-premium">
+            <Link to="/register" className="inline-flex bg-white text-brand-900 px-10 py-5 lg:px-16 lg:py-8 rounded-2xl lg:rounded-[2.5rem] text-lg lg:text-2xl font-bold hover:bg-brand-50 transition-all active:scale-95 shadow-premium">
               Create Your Account
             </Link>
           </div>
