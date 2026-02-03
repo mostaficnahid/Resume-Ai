@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FileText, Mail, Lock, ArrowRight, User } from "lucide-react";
@@ -8,18 +8,30 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
   const register = useAuthStore((state) => state.register);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/dashboard", { replace: true });
+    }
+  }, [isAuthenticated, navigate]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate registration
-    register(email, name);
-    navigate("/dashboard");
+    setIsLoading(true);
+    // Simulate network delay
+    setTimeout(() => {
+      register(email, name);
+      setIsLoading(false);
+    }, 1000);
   };
 
   return (
-    <div className="min-h-screen pt-40 pb-24 flex items-center justify-center px-6">
+    <div className="min-h-screen pt-40 pb-24 flex items-center justify-center px-6 bg-surface">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -81,9 +93,10 @@ const Register = () => {
 
           <button 
             type="submit"
-            className="w-full bg-brand-900 text-white py-5 rounded-2xl font-bold hover:bg-brand-800 transition-all shadow-premium active:scale-95 flex items-center justify-center gap-3"
+            disabled={isLoading}
+            className="w-full bg-brand-900 text-white py-5 rounded-2xl font-bold hover:bg-brand-800 transition-all shadow-premium active:scale-95 flex items-center justify-center gap-3 disabled:opacity-50"
           >
-            Create Account
+            {isLoading ? "Creating Account..." : "Create Account"}
             <ArrowRight className="w-5 h-5" />
           </button>
         </form>
