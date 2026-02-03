@@ -35,7 +35,16 @@ const CustomCursor = () => {
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  // Handle Zustand hydration
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
+  if (!isHydrated) return null;
   if (!isAuthenticated) return <Navigate to="/login" replace />;
+  
   return <>{children}</>;
 };
 
