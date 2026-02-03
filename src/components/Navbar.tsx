@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { FileText, Menu, X, ArrowUpRight, CreditCard } from "lucide-react";
+import { FileText, Menu, X, ArrowUpRight, CreditCard, ArrowRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuthStore } from "../store/authStore";
@@ -27,13 +27,14 @@ const Navbar = () => {
   ];
 
   const closeMenu = () => setIsOpen(false);
+  const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-700 ${scrolled ? "py-4 lg:py-5" : "py-6 lg:py-10"}`}>
       <div className="max-w-7xl mx-auto px-4 lg:px-6">
         <div className={`glass rounded-2xl lg:rounded-[2.5rem] px-5 lg:px-10 py-3 lg:py-5 flex justify-between items-center transition-all duration-700 ${scrolled ? "shadow-premium border-white/50" : "bg-transparent border-transparent shadow-none"}`}>
           <div className="flex items-center">
-            <Link to="/" onClick={closeMenu} className="flex items-center gap-3 lg:gap-5 group">
+            <Link to="/" onClick={closeMenu} className="flex items-center gap-3 lg:gap-5 group relative z-[70]">
               <div className="bg-brand-900 p-2 lg:p-3 rounded-xl lg:rounded-2xl group-hover:rotate-6 transition-transform duration-500 shadow-premium">
                 <FileText className="w-5 h-5 lg:w-6 lg:h-6 text-white" />
               </div>
@@ -81,8 +82,12 @@ const Navbar = () => {
             )}
           </div>
 
-          <div className="md:hidden">
-            <button onClick={() => setIsOpen(!isOpen)} className="text-brand-900 p-2 hover:bg-brand-50 rounded-xl transition-colors shadow-sm">
+          <div className="md:hidden relative z-[70]">
+            <button 
+              onClick={toggleMenu} 
+              className="text-brand-900 p-2 hover:bg-brand-50 rounded-xl transition-colors shadow-sm active:scale-90"
+              aria-label="Toggle Menu"
+            >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
@@ -96,8 +101,8 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.95 }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute top-full left-0 w-full px-4 pt-4 md:hidden"
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute top-full left-0 w-full px-4 pt-4 md:hidden z-[60] pointer-events-auto"
           >
             <div className="glass rounded-[2.5rem] p-8 space-y-8 shadow-2xl border-white/60 noise-texture overflow-hidden">
               {navItems.map((item) => (
