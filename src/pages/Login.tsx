@@ -1,24 +1,36 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { FileText, Mail, Lock, ArrowRight, User } from "lucide-react";
+import { FileText, Mail, Lock, ArrowRight } from "lucide-react";
 import { useAuthStore } from "../store/authStore";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  
   const login = useAuthStore((state) => state.login);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/dashboard", { replace: true });
+    }
+  }, [isAuthenticated, navigate]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate login
-    login(email, "Elite Professional");
-    navigate("/dashboard");
+    setIsLoading(true);
+    // Simulate network delay
+    setTimeout(() => {
+      login(email, "Elite Professional");
+      setIsLoading(false);
+    }, 1000);
   };
 
   return (
-    <div className="min-h-screen pt-40 pb-24 flex items-center justify-center px-6">
+    <div className="min-h-screen pt-40 pb-24 flex items-center justify-center px-6 bg-surface">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -65,9 +77,10 @@ const Login = () => {
 
           <button 
             type="submit"
-            className="w-full bg-brand-900 text-white py-5 rounded-2xl font-bold hover:bg-brand-800 transition-all shadow-premium active:scale-95 flex items-center justify-center gap-3"
+            disabled={isLoading}
+            className="w-full bg-brand-900 text-white py-5 rounded-2xl font-bold hover:bg-brand-800 transition-all shadow-premium active:scale-95 flex items-center justify-center gap-3 disabled:opacity-50"
           >
-            Sign In
+            {isLoading ? "Signing In..." : "Sign In"}
             <ArrowRight className="w-5 h-5" />
           </button>
         </form>
