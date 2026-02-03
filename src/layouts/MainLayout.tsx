@@ -45,11 +45,14 @@ const MainLayout = () => {
             </div>
           </div>
           <div className="pt-14 border-t border-brand-900/10 flex flex-col md:flex-row justify-between items-center gap-10 text-brand-500 text-[11px] font-extrabold uppercase tracking-[0.25em]">
-            <div>&copy; {new Date().getFullYear()} ResumeAI Intelligence. All rights reserved.</div>
+            <div className="flex flex-col gap-2">
+              <div>&copy; {new Date().getFullYear()} ResumeAI Intelligence. All rights reserved. Developed By Mostafic Yellahy Nahid</div>
+              <a href="mailto:mostafic2003@gmail.com" className="text-brand-400 lowercase tracking-normal font-bold hover:text-brand-900 transition-colors">mostafic2003@gmail.com</a>
+            </div>
             <div className="flex gap-12">
-              <a href="#" className="hover:text-brand-900 transition-colors">Twitter</a>
-              <a href="#" className="hover:text-brand-900 transition-colors">LinkedIn</a>
-              <a href="#" className="hover:text-brand-900 transition-colors">GitHub</a>
+              <a href="https://www.facebook.com/mostafic.nahid.373" target="_blank" rel="noopener noreferrer" className="hover:text-brand-900 transition-colors">Facebook</a>
+              <a href="https://www.linkedin.com/in/mostafic-yellahy-nahid-46a0202b5/" target="_blank" rel="noopener noreferrer" className="hover:text-brand-900 transition-colors">LinkedIn</a>
+              <a href="https://github.com/mostaficnahid" target="_blank" rel="noopener noreferrer" className="hover:text-brand-900 transition-colors">GitHub</a>
             </div>
           </div>
         </div>
